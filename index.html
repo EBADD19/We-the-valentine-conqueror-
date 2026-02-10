@@ -1,135 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Valentine 💘</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<!-- Handwritten font -->
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Patrick+Hand&display=swap" rel="stylesheet">
-
-<style>
-body {
-  margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #ff4d6d, #ff8fab);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Patrick Hand', cursive;
-  color: white;
-  text-align: center;
-  overflow: hidden;
-}
-
-.card {
-  background: rgba(0,0,0,0.25);
-  padding: 25px;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 420px;
-}
-
-button {
-  padding: 12px 20px;
-  font-size: 18px;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  margin: 10px;
-  font-family: 'Patrick Hand', cursive;
-}
-
-#yes { background: #00ffb3; }
-#no { background: #ff2e63; position: absolute; }
-
-.panda {
-  font-size: 90px;
-  animation: float 2s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Burnt letter */
-.letter {
-  background: #f5deb3;
-  color: #3b2f2f;
-  padding: 30px;
-  border-radius: 15px;
-  font-family: 'Great Vibes', cursive;
-  font-size: 22px;
-  box-shadow: inset 0 0 40px rgba(0,0,0,0.4),
-              0 0 20px rgba(0,0,0,0.6);
-  position: relative;
-}
-
-.letter:before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: 15px;
-  box-shadow: inset 0 0 60px rgba(0,0,0,0.6);
-  pointer-events: none;
-}
-
-.heart {
-  position: fixed;
-  top: -10px;
-  font-size: 22px;
-  animation: fall linear forwards;
-  color: pink;
-  text-shadow: 0 0 10px hotpink;
-}
-
-@keyframes fall {
-  to { transform: translateY(110vh); opacity: 0; }
-}
-</style>
-</head>
-
-<body>
-
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c6cfdc93f.mp3" type="audio/mpeg">
-</audio>
-
-<div class="card" id="step1">
-  <div class="panda">🐼💖</div>
-  <h2 id="question"></h2>
-  <button id="yes">Yes 😌</button>
-  <button id="no">No 🙄</button>
-</div>
-
 <script>
 const herName = "Aarati";
 const myName = "Ebadd";
 
-document.getElementById("question").innerHTML =
-  "Hey " + herName + ", will you be my Valentine? 💘";
+let step = 0;
 
-const noBtn = document.getElementById("no");
-noBtn.onmouseover = () => {
-  noBtn.style.left = Math.random() * 80 + "vw";
-  noBtn.style.top = Math.random() * 80 + "vh";
-};
+function render(content) {
+  document.body.innerHTML = content;
+}
 
-document.getElementById("yes").onclick = () => {
+render(`
+  <div class="card">
+    <div class="panda">🐼💖</div>
+    <h2>Hey ${herName}, will you be my Valentine? 💘</h2>
+    <button onclick="yesClick()">Yes 😌</button>
+    <button onclick="noClick()" id="noBtn">No 🙄</button>
+    <p id="msg"></p>
+  </div>
+`);
+
+function noClick() {
+  document.getElementById("msg").innerHTML =
+    "❌ Wrong choice. Wrong option. Wrong EVERYTHING.<br>" +
+    "How can you be so wrong, duffer? 😤💔<br><br>" +
+    "<b>You have no choice now. Click YES 😌</b>";
+
+  document.getElementById("noBtn").style.display = "none";
+}
+
+function yesClick() {
   document.getElementById("music").play();
-  document.body.innerHTML = `
-    <div class="letter">
-      My Dearest ${herName},<br><br>
-      This isn’t a question anymore, it’s fate pretending to ask politely.
-      You already know how this ends—me claiming your heart,
-      and you pretending you didn’t want it all along.<br><br>
-      Signed with love, confidence, and zero hesitation,<br>
-      <b>${myName} (your forever daddy)</b> 💘
-    </div>
-  `;
-  hearts();
-};
+  step++;
+
+  if (step === 1) {
+    render(`
+      <div class="card">
+        <h2>Heheh… you said yes 😏</h2>
+        <p>I knew it.<br>
+        Acting tough but soft for me hahaha 💕</p>
+        <button onclick="yesClick()">Continue 😈</button>
+      </div>
+    `);
+  }
+
+  else if (step === 2) {
+    render(`
+      <div class="card">
+        <h2>Too late now 😌</h2>
+        <p>
+        Destiny locked in.<br>
+        No escape, only affection 😌💘
+        </p>
+        <button onclick="yesClick()">Open letter 📜</button>
+      </div>
+    `);
+  }
+
+  else {
+    render(`
+      <div class="letter">
+        My Dearest ${herName},<br><br>
+        You tried clicking no… adorable.
+        But some stories don’t allow wrong endings.
+        You chose me, and I chose you back—
+        confidently, proudly, and with a smile 😌<br><br>
+        Signed forever,<br>
+        <b>${myName} (your forever daddy)</b> 💘
+      </div>
+    `);
+    hearts();
+  }
+}
 
 function hearts() {
   setInterval(() => {
@@ -143,6 +83,3 @@ function hearts() {
   }, 300);
 }
 </script>
-
-</body>
-</html>
