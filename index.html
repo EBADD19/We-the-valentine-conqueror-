@@ -1,110 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Marriage Already Approved 💍</title>
-
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #ff4d6d, #ff8fab);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    overflow: hidden;
-  }
-
-  .card {
-    background: rgba(0,0,0,0.25);
-    padding: 30px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 420px;
-    text-align: center;
-    box-shadow: 0 0 25px rgba(0,0,0,0.3);
-    z-index: 2;
-  }
-
-  h1 { margin-bottom: 10px; }
-  p { font-size: 16px; margin-bottom: 20px; }
-
-  button {
-    padding: 14px 24px;
-    font-size: 16px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    margin: 5px;
-  }
-
-  #yes {
-    background: #00ffb3;
-    color: black;
-    font-weight: bold;
-  }
-
-  #no {
-    background: #ff2e63;
-    color: white;
-    position: absolute;
-  }
-
-  .heart {
-    position: fixed;
-    top: -10px;
-    font-size: 20px;
-    animation: fall linear forwards;
-    opacity: 0.8;
-  }
-
-  @keyframes fall {
-    to {
-      transform: translateY(110vh);
-      opacity: 0;
-    }
-  }
-</style>
-</head>
-
-<body>
-
-<audio autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c6cfdc93f.mp3" type="audio/mpeg">
-</audio>
-
-<div class="card">
-  <h1>📜 Official Notice</h1>
-  <p>
-    You call yourself my wife.  
-    Daddy doesn’t debate facts.  
-    This isn’t a question—  
-    it’s a confirmation 😌💍
-  </p>
-
-  <button id="yes" onclick="accepted()">Accepted ✔</button>
-  <button id="no">Reject ❌</button>
-</div>
-
 <script>
-  const no = document.getElementById("no");
+  // 🔴 NAMES
+  const herName = "Aarati";
+  const myName = "Ebadd";
 
-  no.addEventListener("mouseover", () => {
-    no.style.left = Math.random() * 80 + "vw";
-    no.style.top = Math.random() * 80 + "vh";
+  document.getElementById("questionText").innerHTML =
+    `Hey ${herName}, will you be my Valentine?<br>
+     (Relax. ${myName} already knows the answer 😌)`;
+
+  const noBtn = document.getElementById("no");
+  noBtn.addEventListener("mouseover", () => {
+    noBtn.style.left = Math.random() * 80 + "vw";
+    noBtn.style.top = Math.random() * 80 + "vh";
   });
 
-  function accepted() {
+  function goToStep2() {
+    document.getElementById("bgMusic").play();
+
     document.body.innerHTML = `
       <div class="card">
-        <h1>💍 Marriage Certificate</h1>
+        <h1>📜 Marriage Certificate</h1>
         <p>
-          This certifies that <b>Wife</b>  
-          is officially claimed by <b>Daddy</b>.  
-          Lifetime partnership activated.  
-          No refunds. No escapes. ❤️
+          This certifies that <b>${herName}</b><br>
+          is officially married to <b>${myName} (Daddy)</b>.<br><br>
+          Valentine accepted.  
+          Wife status confirmed.  
+          Lifetime access granted 💍😌
         </p>
       </div>
     `;
@@ -119,11 +39,7 @@
       heart.style.left = Math.random() * 100 + "vw";
       heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
       document.body.appendChild(heart);
-
       setTimeout(() => heart.remove(), 5000);
     }, 200);
   }
 </script>
-
-</body>
-</html>
