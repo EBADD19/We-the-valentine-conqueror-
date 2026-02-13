@@ -1,11 +1,10 @@
 <script>
 const herName = "Aarati";
 const myName = "Ebadd";
+const app = document.getElementById("app");
 
-let step = 0;
-
-function render(content) {
-  document.body.innerHTML = content;
+function render(html) {
+  app.innerHTML = html;
 }
 
 render(`
@@ -20,13 +19,13 @@ render(`
 
 function noClick() {
   document.getElementById("msg").innerHTML =
-    "❌ Wrong choice. Wrong option. Wrong EVERYTHING.<br>" +
-    "How can you be so wrong, duffer? 😤💔<br><br>" +
+    "❌ Wrong choice. Wrong option. Wrong EVERYTHING 😤<br>" +
+    "How can you be so wrong, duffer?<br><br>" +
     "<b>You have no choice now. Click YES 😌</b>";
-
   document.getElementById("noBtn").style.display = "none";
 }
 
+let step = 0;
 function yesClick() {
   document.getElementById("music").play();
   step++;
@@ -35,35 +34,28 @@ function yesClick() {
     render(`
       <div class="card">
         <h2>Heheh… you said yes 😏</h2>
-        <p>I knew it.<br>
-        Acting tough but soft for me hahaha 💕</p>
+        <p>I knew it. Destiny never misses 😌</p>
         <button onclick="yesClick()">Continue 😈</button>
       </div>
     `);
   }
-
   else if (step === 2) {
     render(`
       <div class="card">
         <h2>Too late now 😌</h2>
-        <p>
-        Destiny locked in.<br>
-        No escape, only affection 😌💘
-        </p>
+        <p>No escape. Only affection 💘</p>
         <button onclick="yesClick()">Open letter 📜</button>
       </div>
     `);
   }
-
   else {
     render(`
       <div class="letter">
         My Dearest ${herName},<br><br>
-        You tried clicking no… adorable.
-        But some stories don’t allow wrong endings.
-        You chose me, and I chose you back—
-        confidently, proudly, and with a smile 😌<br><br>
-        Signed forever,<br>
+        You tried choosing no… cute mistake.
+        Some stories don’t allow wrong endings.
+        You chose me—and I chose you back 😌<br><br>
+        Forever yours,<br>
         <b>${myName} (your forever daddy)</b> 💘
       </div>
     `);
